@@ -251,10 +251,3 @@ plt.show()
 # Print the position predictions
 print("Position Predictions:")
 print(y_pred)
-
-
-# In[ ]:
-
-
-
-
