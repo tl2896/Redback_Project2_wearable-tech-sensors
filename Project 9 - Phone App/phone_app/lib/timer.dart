@@ -6,7 +6,6 @@ import 'results.dart';
 
 class TimerPage extends StatefulWidget {
   final String title;
-  final MapPage mapPageInstance = MapPage();
   TimerPage({required this.title});
 
   @override
@@ -50,11 +49,12 @@ class _TimerPageState extends State<TimerPage> {
   void _startStopTimer() {
     if (!_isRunning) {
       _isRunning = true;
-      MapPage().startStopTracking(true);
+      MapPageSingleton().mapPageInstance.startStopTracking(true);
     } else {
       _timer.cancel();
-      MapPage().startStopTracking(false);
-      List<LatLng> polyPoints = widget.mapPageInstance.getPolyList();
+      MapPageSingleton().mapPageInstance.startStopTracking(false);
+      List<LatLng> polyPoints =
+          MapPageSingleton().mapPageInstance.getPolyList();
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => Results(
                 polyLinePoints: polyPoints,
@@ -66,7 +66,7 @@ class _TimerPageState extends State<TimerPage> {
   @override
   void dispose() {
     _timer.cancel();
-    MapPage().startStopTracking(false);
+    MapPageSingleton().mapPageInstance.startStopTracking(false);
     super.dispose();
   }
 
@@ -139,7 +139,7 @@ class _TimerPageState extends State<TimerPage> {
                 maxWidth: MediaQuery.of(context).size.width,
                 maxHeight: MediaQuery.of(context).size.width,
               ),
-              child: MapPage(),
+              child: MapPageSingleton().mapPageInstance,
             )
           ], // children of list view
         ),

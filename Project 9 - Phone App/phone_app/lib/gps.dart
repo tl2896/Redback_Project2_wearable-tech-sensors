@@ -219,6 +219,18 @@ class _MapPageState extends State<MapPage> {
   double? workOutSeconds = null;
   double? evelvationChange = null;
   double? avgSpeed = null;
-}// end class
+} // end class
 
+class MapPageSingleton {
+  static late final MapPageSingleton _singleton = MapPageSingleton._internal();
 
+  late MapPage mapPageInstance;
+
+  factory MapPageSingleton() {
+    return _singleton;
+  }
+
+  MapPageSingleton._internal() {
+    mapPageInstance = MapPage();
+  }
+}

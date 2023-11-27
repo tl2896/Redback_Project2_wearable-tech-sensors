@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:phone_app/gps.dart';
 
 class Results extends StatefulWidget {
   //Results({super.key});
@@ -19,12 +21,12 @@ class _Results extends State<Results> {
   @override
   void initState() {
     super.initState();
-    calculateDistance(widget.polyLinePoints);
+    totalDistance = calculateDistance(widget.polyLinePoints);
   }
 
-  double calculateDistance(List<LatLng> polyLinePoints) {
-    double totalDistance = 0.0;
+  List PolylinePoints = MapPageSingleton().mapPageInstance.getPolyList();
 
+  double calculateDistance(List<LatLng> polyLinePoints) {
     for (int i = 0; i < polyLinePoints.length - 1; i++) {
       LatLng point1 = polyLinePoints[i];
       LatLng point2 = polyLinePoints[i + 1];
