@@ -138,7 +138,6 @@ class _MapPageState extends State<MapPage> {
       // Add polyline co-ord
       _coordsList.add(_currentPosition!);
       widget._polylineCoords = _coordsList;
-      print("Polyline coords: ${widget._polylineCoords}");
       cameraFollow(_currentPosition!);
       int timercount = 0;
       Timer.periodic(Duration(seconds: 10), (timer) {

@@ -134,7 +134,7 @@ class _Results extends State<Results> {
                             ),
                           ),
                           Text(
-                            'Speed',
+                            'Yet to implement', //   FIX *******************************
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -155,7 +155,7 @@ class _Results extends State<Results> {
                             padding: EdgeInsets.all(8.0),
                             child: Text(
 // FIX ------------
-                              '55',
+                              '55', // FIX  ******************************
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -164,7 +164,7 @@ class _Results extends State<Results> {
                             ),
                           ),
                           Text(
-                            'RPM',
+                            'Workout Time',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -188,7 +188,7 @@ class _Results extends State<Results> {
                             padding: EdgeInsets.all(8.0),
                             child: Text(
 // FIX ------
-                              '200',
+                              _formatTime(totalTime),
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -197,7 +197,7 @@ class _Results extends State<Results> {
                             ),
                           ),
                           Text(
-                            'Incline',
+                            'Yet to Implement',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -218,7 +218,7 @@ class _Results extends State<Results> {
                             padding: EdgeInsets.all(8.0),
                             child: Text(
 // FIX -----------
-                              '25',
+                              _avgPage(totalDistance, totalTime),
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -244,5 +244,19 @@ class _Results extends State<Results> {
         ),
       ),
     );
+  }
+
+  String _formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    String minutesStr = minutes.toString().padLeft(2, '0');
+    String secondsStr = remainingSeconds.toString().padLeft(2, '0');
+    return '$minutesStr:$secondsStr';
+  }
+
+  String _avgPage(double distance, int seconds) {
+    double hours = seconds / 60;
+    double pace = distance / hours;
+    return pace.toStringAsFixed(2);
   }
 }
