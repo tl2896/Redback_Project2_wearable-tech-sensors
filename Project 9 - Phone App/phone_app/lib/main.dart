@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-//import 'email.dart';
 import 'gps.dart';
 import 'homePage.dart';
-//import 'EditProfile.dart';
 import 'Friends.dart';
-//import 'MyActivity.dart';
 import 'myAccount.dart';
-//import 'Workout.dart';
-//import 'mapsample.dart';
 import 'information.dart';
 import 'contact.dart';
-//import 'login.dart';
-//import 'signup.dart';
-//import 'timer.dart';
-//import 'privacy.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
