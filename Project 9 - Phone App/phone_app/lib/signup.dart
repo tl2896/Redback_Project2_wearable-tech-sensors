@@ -1,134 +1,216 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http; // Import the http package
+import 'homePage.dart';
 
 void main() {
-  runApp(SignUpApp());
+  runApp(const Login());
 }
 
-class SignUpApp extends StatelessWidget {
+class Login extends StatelessWidget {
+  const Login({super.key});
+
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SignUpPage(),
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('Login & Signup'),
+            bottom: TabBar(
+              tabs: [
+                Tab(text: 'Login'),
+                Tab(text: 'Signup'),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              LoginCard(),
+              SignupCard(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
 
-class SignUpPage extends StatelessWidget {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-
-  // Function to make a POST request to your API
-  Future<void> signUp() async {
-    final apiUrl = 'http://192.168.237.105:3000/api/device/add';
-
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      body: {
-        'user': usernameController.text,
-        'email': emailController.text,
-        'password': passwordController.text
-      },
-    );
-
-    if (response.statusCode == 200) {
-      // Success! You can handle the response here if needed.
-      print('Sign-up successful!');
-    } else {
-      // Error handling here, you can show an error message to the user.
-      print('Sign-up failed. Status code: ${response.statusCode}');
-    }
-  }
-
+class LoginCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: null,
-      body: Container(
-        color: const Color(0xff87A395),
+    return Center(
+      child: Card(
+        margin: EdgeInsets.all(20.0),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Sign Up',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextField(
+                decoration: InputDecoration(labelText: 'Email'),
               ),
-              SizedBox(height: 16),
-              Text(
-                "Already have an account? Log in",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),
-              ),
-              SizedBox(height: 32),
-              TextFormField(
-                controller:
-                    usernameController, // Add controller to capture user input
-                decoration: InputDecoration(
-                  labelText: 'Username',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller:
-                    emailController, // Add controller to capture user input
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller:
-                    passwordController, // Add controller to capture user input
+              SizedBox(height: 10),
+              TextField(
+                decoration: InputDecoration(labelText: 'Password'),
                 obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
-                ),
               ),
-              SizedBox(height: 16),
-              TextFormField(
-                controller:
-                    confirmPasswordController, // Add controller to capture user input
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Confirm Password',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(height: 32),
+              SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Call the signUp function when the button is pressed
-                  signUp();
+                  // Handle login logic here
                 },
-                style: ElevatedButton.styleFrom(
-                  primary: const Color(0xff87A395),
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                ),
-                child: Text(
-                  'Sign Up',
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
+                child: Text('Login'),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class SignupCard extends StatelessWidget {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Card(
+        margin: EdgeInsets.all(20.0),
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(labelText: 'Full Name'),
+              ),
+              SizedBox(height: 10),
+              TextField(
+                controller: emailController,
+                decoration: InputDecoration(labelText: 'Email'),
+              ),
+              SizedBox(height: 10),
+              TextField(
+                controller: passwordController,
+                decoration: InputDecoration(labelText: 'Password'),
+                obscureText: true,
+              ),
+              SizedBox(height: 10),
+              TextField(
+                controller: confirmPasswordController,
+                decoration: InputDecoration(labelText: 'Confirm Password'),
+                obscureText: true,
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  signUp(context);
+                },
+                child: Text('Signup'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Login function
+  void login() {}
+
+  // Sign up function
+  Future<void> signUp(BuildContext context) async {
+    UserCredential? userCredential;
+    if (nameController.text.isEmpty) {
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              animType: AnimType.scale,
+              showCloseIcon: true,
+              title: "Error",
+              desc: "You have not entered a your Name",
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {})
+          .show();
+      return;
+    }
+    if (emailController.text.isEmpty) {
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              animType: AnimType.scale,
+              showCloseIcon: true,
+              title: "Error",
+              desc: "You have not entered a your Email",
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {})
+          .show();
+      return;
+    }
+    if (passwordController.text.isEmpty) {
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              animType: AnimType.scale,
+              showCloseIcon: true,
+              title: "Error",
+              desc: "You have not entered a password",
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {})
+          .show();
+      return;
+    }
+    if (confirmPasswordController.text.isEmpty) {
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              animType: AnimType.scale,
+              showCloseIcon: true,
+              title: "Error",
+              desc: "You have not confirmed your password",
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {})
+          .show();
+      return;
+    }
+
+    if (confirmPasswordController.text.compareTo(passwordController.text) !=
+        0) {
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              animType: AnimType.scale,
+              showCloseIcon: true,
+              title: "Error",
+              desc: "Your password and confirm password do not match",
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {})
+          .show();
+      return;
+    }
+    try {
+      userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text);
+    } catch (e) {
+      print("error: " + e.toString());
+    }
+    if (userCredential != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => HomePage(
+                  title: '',
+                )),
+      );
+    }
   }
 }

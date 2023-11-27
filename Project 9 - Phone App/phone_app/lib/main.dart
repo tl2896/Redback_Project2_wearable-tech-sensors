@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
-import 'gps.dart';
 import 'homePage.dart';
 import 'Friends.dart';
 import 'myAccount.dart';
 import 'information.dart';
 import 'contact.dart';
+import 'signup.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
+  // check if user
+  User? isUser = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,8 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: HomePage(title: ''),
-      //home: MapPage(),
+      home: isUser != null ? HomePage(title: '') : Login(),
     );
   }
 }

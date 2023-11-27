@@ -1,4 +1,8 @@
+import 'dart:math';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'main.dart';
 import 'privacy.dart';
 import 'editProfile.dart';
 //import 'myActivity.dart';
@@ -182,7 +186,9 @@ class _MyAccount extends State<MyAccount> {
             child: Container(
               width: 300,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  logOut();
+                },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.red,
                   shape: RoundedRectangleBorder(
@@ -198,7 +204,7 @@ class _MyAccount extends State<MyAccount> {
                     ),
                     SizedBox(width: 10),
                     Text(
-                      "TERMINATE ACCOUNT",
+                      "LOGOUT",
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ],
@@ -256,6 +262,14 @@ class _MyAccount extends State<MyAccount> {
       //     ),
       //   ],
       // ),
+    );
+  }
+
+  Future<void> logOut() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => MyApp()),
     );
   }
 }
