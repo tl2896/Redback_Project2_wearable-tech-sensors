@@ -39,7 +39,9 @@ class _MapPageState extends State<MapPage> {
 
   // test variables
   static const LatLng _initPos = LatLng(-38.1986127, 144.2986353);
-  static const LatLng _endPos = LatLng(-38.1990677, 144.3081407);
+  static const LatLng _secondPos = LatLng(-38.1990677, 144.3081407);
+  static const LatLng _endPos = LatLng(-38.1999623, 144.3006456);
+  bool testBool = false;
 
   @override
   void initState() {
@@ -143,7 +145,7 @@ class _MapPageState extends State<MapPage> {
       Timer.periodic(Duration(seconds: 10), (timer) {
         getLocationUpdates();
         timercount++;
-        if (timercount >= 1) {
+        if (timercount >= 2) {
           timer.cancel();
         }
       });
@@ -190,7 +192,12 @@ class _MapPageState extends State<MapPage> {
       if (currentLocation.latitude != null &&
           currentLocation.longitude != null) {
         setState(() {
-          _currentPosition = _endPos;
+          if (!testBool) {
+            _currentPosition = _secondPos;
+            testBool = true;
+          } else {
+            _currentPosition = _endPos;
+          }
         });
 
         // Add polyline co-ord

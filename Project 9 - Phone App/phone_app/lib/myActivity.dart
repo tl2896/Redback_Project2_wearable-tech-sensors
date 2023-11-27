@@ -46,14 +46,18 @@ class _MyActivityState extends State<MyActivity> {
                         width: 320,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => TimerPage(
-                                  title: 'Walking',
-                                ),
-                              ),
-                            );
+                            TimerPageSingleton().updateTitle("Walking");
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) =>
+                            //         TimerPageSingleton().timerPageInstance,
+                            //   ),
+                            // );
+
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) =>
+                                    TimerPageSingleton().timerPageInstance));
                           },
                           child: const Text("Walking",
                               style: TextStyle(fontSize: 18)),

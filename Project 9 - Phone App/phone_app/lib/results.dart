@@ -1,9 +1,7 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:phone_app/gps.dart';
+import 'seconds_singleton.dart';
 
 class Results extends StatefulWidget {
   //Results({super.key});
@@ -17,14 +15,13 @@ class Results extends StatefulWidget {
 
 class _Results extends State<Results> {
   double totalDistance = 0;
-  int totalTime = 0;
+  int totalTime = 180;
   @override
   void initState() {
     super.initState();
     totalDistance = calculateDistance(widget.polyLinePoints);
+    totalTime = TimerSingleton().seconds;
   }
-
-  List PolylinePoints = MapPageSingleton().mapPageInstance.getPolyList();
 
   double calculateDistance(List<LatLng> polyLinePoints) {
     for (int i = 0; i < polyLinePoints.length - 1; i++) {
@@ -87,7 +84,7 @@ class _Results extends State<Results> {
                   padding: EdgeInsets.all(10.0),
                   child: Text(
 // FIX -----
-                    '$totalDistance',
+                    '${totalDistance.toStringAsFixed(2)}',
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -125,7 +122,7 @@ class _Results extends State<Results> {
                             padding: EdgeInsets.all(8.0),
                             child: Text(
 // FIX ---------
-                              '5',
+                              _formatTime(totalTime),
                               style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -134,7 +131,7 @@ class _Results extends State<Results> {
                             ),
                           ),
                           Text(
-                            'Yet to implement', //   FIX *******************************
+                            'Total Time', //   FIX *******************************
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -155,7 +152,7 @@ class _Results extends State<Results> {
                             padding: EdgeInsets.all(8.0),
                             child: Text(
 // FIX ------------
-                              '55', // FIX  ******************************
+                              'Y T I', // FIX  ******************************
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -164,7 +161,7 @@ class _Results extends State<Results> {
                             ),
                           ),
                           Text(
-                            'Workout Time',
+                            'Y T I',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -188,7 +185,7 @@ class _Results extends State<Results> {
                             padding: EdgeInsets.all(8.0),
                             child: Text(
 // FIX ------
-                              _formatTime(totalTime),
+                              _avgPage(totalDistance, totalTime),
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -197,7 +194,7 @@ class _Results extends State<Results> {
                             ),
                           ),
                           Text(
-                            'Yet to Implement',
+                            'Average Pace',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -218,7 +215,7 @@ class _Results extends State<Results> {
                             padding: EdgeInsets.all(8.0),
                             child: Text(
 // FIX -----------
-                              _avgPage(totalDistance, totalTime),
+                              "Y T I",
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -227,7 +224,7 @@ class _Results extends State<Results> {
                             ),
                           ),
                           Text(
-                            'Avg Pace',
+                            'Y T I',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -255,7 +252,7 @@ class _Results extends State<Results> {
   }
 
   String _avgPage(double distance, int seconds) {
-    double hours = seconds / 60;
+    double hours = seconds / 60 / 60;
     double pace = distance / hours;
     return pace.toStringAsFixed(2);
   }

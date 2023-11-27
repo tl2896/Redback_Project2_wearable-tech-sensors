@@ -3,10 +3,16 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'gps.dart';
 import 'results.dart';
+import 'seconds_singleton.dart';
 
 class TimerPage extends StatefulWidget {
   final String title;
   TimerPage({required this.title});
+  int seconds = 0;
+  int elapsed = 0;
+  int getSeconds() {
+    return elapsed;
+  }
 
   @override
   _TimerPageState createState() => _TimerPageState();
@@ -28,6 +34,8 @@ class _TimerPageState extends State<TimerPage> {
     if (!_isPaused && _isRunning) {
       setState(() {
         _seconds++;
+        TimerSingleton().seconds = _seconds;
+        widget.seconds = _seconds;
       });
     }
   }
@@ -58,13 +66,14 @@ class _TimerPageState extends State<TimerPage> {
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => Results(
                 polyLinePoints: polyPoints,
-                seconds: _seconds,
+                seconds: widget.elapsed,
               )));
     }
   }
 
   @override
   void dispose() {
+    widget.elapsed = _seconds;
     _timer.cancel();
     MapPageSingleton().mapPageInstance.startStopTracking(false);
     super.dispose();
@@ -145,5 +154,26 @@ class _TimerPageState extends State<TimerPage> {
         ),
       ), // body container
     );
+  }
+}
+
+class TimerPageSingleton {
+  static late final TimerPageSingleton _singleton =
+      TimerPageSingleton._internal();
+
+  late TimerPage timerPageInstance;
+
+  factory TimerPageSingleton() {
+    return _singleton;
+  }
+
+  TimerPageSingleton._internal() {
+    timerPageInstance = TimerPage(
+      title: '',
+    );
+  }
+
+  void updateTitle(String newTitle) {
+    timerPageInstance = TimerPage(title: newTitle);
   }
 }
