@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'gps.dart';
+import 'results.dart';
 
 class TimerPage extends StatefulWidget {
   final String title;
-
+  final MapPage mapPageInstance = MapPage();
   TimerPage({required this.title});
 
   @override
@@ -52,8 +54,12 @@ class _TimerPageState extends State<TimerPage> {
     } else {
       _timer.cancel();
       MapPage().startStopTracking(false);
-      Navigator.of(context)
-          .pop(); // Close the screen and go back to the previous screen
+      List<LatLng> polyPoints = widget.mapPageInstance.getPolyList();
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => Results(
+                polyLinePoints: polyPoints,
+                seconds: _seconds,
+              )));
     }
   }
 

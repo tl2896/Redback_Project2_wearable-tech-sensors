@@ -12,6 +12,11 @@ class MapPage extends StatefulWidget {
     _isTracking = isTracking;
   }
 
+  List<LatLng> _polylineCoords = [];
+  List<LatLng> getPolyList() {
+    return _polylineCoords;
+  }
+
   @override
   State<MapPage> createState() => _MapPageState();
 }
@@ -23,8 +28,8 @@ class _MapPageState extends State<MapPage> {
   LatLng? _currentPosition = null;
   bool _isTracking = true;
 
-  List<List> _coordsList = [];
-  List<LatLng> _polylineCoords = [];
+  List<LatLng> _coordsList = [];
+
   Polyline _polyLine = Polyline(
     polylineId: PolylineId("userRoute"),
     color: Colors.blue,
@@ -39,6 +44,7 @@ class _MapPageState extends State<MapPage> {
   @override
   void initState() {
     super.initState();
+    widget._polylineCoords = [];
     setLocation();
     //Timer.periodic(Duration(seconds: 10), (timer) {
     //getLocationUpdates();
@@ -130,7 +136,9 @@ class _MapPageState extends State<MapPage> {
       });
 
       // Add polyline co-ord
-      _polylineCoords.add(_currentPosition!);
+      _coordsList.add(_currentPosition!);
+      widget._polylineCoords = _coordsList;
+      print("Polyline coords: ${widget._polylineCoords}");
       cameraFollow(_currentPosition!);
       int timercount = 0;
       Timer.periodic(Duration(seconds: 10), (timer) {
@@ -187,13 +195,14 @@ class _MapPageState extends State<MapPage> {
         });
 
         // Add polyline co-ord
-        _polylineCoords.add(_currentPosition!);
+        _coordsList.add(_currentPosition!);
+        widget._polylineCoords = _coordsList;
         // update polylines
         _polyLine = Polyline(
             polylineId: PolylineId("userRoute"),
             color: Colors.blue,
             width: 5,
-            points: _polylineCoords);
+            points: widget._polylineCoords);
 
         // camera to follow
         cameraFollow(_currentPosition!);
@@ -210,7 +219,6 @@ class _MapPageState extends State<MapPage> {
   double? workOutSeconds = null;
   double? evelvationChange = null;
   double? avgSpeed = null;
-  double? topSpeed = null;
 }// end class
 
 
