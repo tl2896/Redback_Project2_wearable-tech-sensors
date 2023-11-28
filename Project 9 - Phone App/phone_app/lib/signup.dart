@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'homePage.dart';
@@ -40,6 +41,8 @@ class Login extends StatelessWidget {
 }
 
 class LoginCard extends StatelessWidget {
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -51,17 +54,19 @@ class LoginCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(labelText: 'Email'),
               ),
               SizedBox(height: 10),
               TextField(
+                controller: passwordController,
                 decoration: InputDecoration(labelText: 'Password'),
                 obscureText: true,
               ),
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Handle login logic here
+                  login(context);
                 },
                 child: Text('Login'),
               ),
@@ -71,6 +76,54 @@ class LoginCard extends StatelessWidget {
       ),
     );
   }
+
+  // Login function
+  Future<void> login(BuildContext context) async {
+    UserCredential? userCredential;
+    if (emailController.text.isEmpty) {
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              animType: AnimType.scale,
+              showCloseIcon: true,
+              title: "Error",
+              desc: "You have not entered a your email",
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {})
+          .show();
+      return;
+    }
+    if (passwordController.text.isEmpty) {
+      AwesomeDialog(
+              context: context,
+              dialogType: DialogType.error,
+              animType: AnimType.scale,
+              showCloseIcon: true,
+              title: "Error",
+              desc: "You have not entered a your password",
+              btnCancelOnPress: () {},
+              btnOkOnPress: () {})
+          .show();
+      return;
+    }
+
+    try {
+      userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+    } catch (e) {
+      print("Error: $e");
+    }
+
+    if (userCredential != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) => HomePage(
+                  title: '',
+                )),
+      );
+    }
+  }
 }
 
 class SignupCard extends StatelessWidget {
@@ -78,6 +131,8 @@ class SignupCard extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+
+  FirebaseFirestore db = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -122,9 +177,6 @@ class SignupCard extends StatelessWidget {
       ),
     );
   }
-
-  // Login function
-  void login() {}
 
   // Sign up function
   Future<void> signUp(BuildContext context) async {
@@ -203,6 +255,22 @@ class SignupCard extends StatelessWidget {
     } catch (e) {
       print("error: " + e.toString());
     }
+    if (userCredential != null) {
+      String id = userCredential.user!.uid;
+
+      final user = <String, dynamic>{
+        "name": nameController.text,
+        "email": emailController.text,
+        "id": id,
+      };
+
+      try {
+        await db.collection("users").doc(id).set(user);
+      } catch (e) {
+        print("Error: " + e.toString());
+      }
+    }
+
     if (userCredential != null) {
       Navigator.pushReplacement(
         context,

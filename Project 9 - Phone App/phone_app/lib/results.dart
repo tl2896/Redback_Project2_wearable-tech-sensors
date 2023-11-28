@@ -1,5 +1,8 @@
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'seconds_singleton.dart';
 
@@ -16,11 +19,13 @@ class Results extends StatefulWidget {
 class _Results extends State<Results> {
   double totalDistance = 0;
   int totalTime = 180;
+  FirebaseFirestore db = FirebaseFirestore.instance;
   @override
   void initState() {
     super.initState();
     totalDistance = calculateDistance(widget.polyLinePoints);
     totalTime = TimerSingleton().seconds;
+    logData();
   }
 
   double calculateDistance(List<LatLng> polyLinePoints) {
@@ -255,5 +260,28 @@ class _Results extends State<Results> {
     double hours = seconds / 60 / 60;
     double pace = distance / hours;
     return pace.toStringAsFixed(2);
+  }
+
+  Future<void> logData() async {
+    List<Map<String, double>> latLngMapList = widget.polyLinePoints
+        .map((latLng) =>
+            {'latitude': latLng.latitude, 'longitude': latLng.longitude})
+        .toList();
+
+    final workOut = <String, dynamic>{
+      "date": DateTime.now().toString(),
+      "distance": totalDistance,
+      "time": totalTime,
+      "avgPace": _avgPage(totalDistance, totalTime),
+      "path": latLngMapList,
+    };
+
+    try {
+      String? id = FirebaseAuth.instance.currentUser?.uid;
+
+      db.collection("users").doc(id).collection("workouts").add(workOut);
+    } catch (e) {
+      print("Error: " + e.toString());
+    }
   }
 }
