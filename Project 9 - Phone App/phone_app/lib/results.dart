@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'homePage.dart';
 import 'seconds_singleton.dart';
 
 class Results extends StatefulWidget {
@@ -242,9 +243,31 @@ class _Results extends State<Results> {
                 ),
               ],
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: returnHome,
+              style: ElevatedButton.styleFrom(
+                primary: Colors.black,
+                minimumSize: Size(160, 60),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: Text('Home'),
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  void returnHome() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => HomePage(
+                title: '',
+              )),
     );
   }
 

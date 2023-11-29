@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -32,35 +34,14 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
 
   @override
-  int avgPace = 32;
-  int totalKilometer = 100;
-  int heartRate = 5;
-  int totalSteps = 7;
-  int avgTime = 10;
+  double totalAvgPace = 32;
+  double totalKilometer = 100;
+  double totalTime = 7;
+  double totalAvgTime = 10;
+  int totalWorkouts = 0;
   void initState() {
     super.initState();
-    fetchData();
-  }
-
-  Future<void> fetchData() async {
-    try {
-      final response =
-          await http.get(Uri.parse('http://192.168.211.105:3000/api/data'));
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        setState(() {
-          avgPace = data['avgPace'];
-          totalKilometer = data['totalKilometer'];
-          heartRate = data['heartRate'];
-          totalSteps = data['totalSteps'];
-          avgTime = data['avgTime'];
-        });
-      } else {
-        print('Failed to fetch avgPace: ${response.statusCode}');
-      }
-    } catch (e) {
-      print('Error fetching avgPace: $e');
-    }
+    retrieveLogs();
   }
 
   Widget build(BuildContext context) {
@@ -90,13 +71,30 @@ class _HomePageState extends State<HomePage> {
         ),
         body: TabBarView(
           children: [
-            HomeTab(
-              totalKilometer: totalKilometer,
-              heartRate: heartRate,
-              totalSteps: totalSteps,
-              avgTime: avgTime,
-              avgPace: avgPace,
+            FutureBuilder<void>(
+              future: retrieveLogs(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else {
+                  return HomeTab(
+                    totalKilometer: totalKilometer,
+                    totalTime: totalTime,
+                    avgTime: totalAvgTime,
+                    avgPace: totalAvgPace,
+                    workouts: totalWorkouts,
+                  );
+                }
+              },
             ),
+            // HomeTab(
+            //   totalKilometer: totalKilometer,
+            //   totalTime: totalTime,
+            //   avgTime: totalAvgTime,
+            //   avgPace: totalAvgPace,
+            // ),
             MyActivity(
               title: '',
             ),
@@ -146,21 +144,56 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  Future<void> retrieveLogs() async {
+    String? userID = FirebaseAuth.instance.currentUser?.uid.toString();
+
+    if (userID == null) {
+      return;
+    }
+
+    FirebaseFirestore db = FirebaseFirestore.instance;
+
+    final userWorkoutRef =
+        db.collection("users").doc(userID).collection('workouts');
+    QuerySnapshot snapShot = await userWorkoutRef.get();
+    final data = snapShot.docs.map((doc) => doc.data()).toList();
+    calculateTotals(data);
+  }
+
+  void calculateTotals(List data) {
+    double distance = 0;
+    double time = 0;
+    int counter = 0;
+    double avgPace = 0;
+    double avgTime = 0;
+    for (var workout in data) {
+      counter++;
+      distance += workout['distance'];
+      time += workout['time'];
+      avgPace += double.parse(workout["avgPace"]);
+    }
+    totalKilometer = distance;
+    totalTime = time;
+    totalAvgPace = avgPace / counter;
+    totalAvgTime = totalTime / counter;
+    totalWorkouts = counter;
+  }
 }
 
 class HomeTab extends StatelessWidget {
-  final int totalKilometer;
-  final int heartRate;
-  final int totalSteps;
-  final int avgTime;
-  final int avgPace;
+  final double totalKilometer;
+  final double totalTime;
+  final double avgTime;
+  final double avgPace;
+  final int workouts;
 
   HomeTab({
     required this.totalKilometer,
-    required this.heartRate,
-    required this.totalSteps,
+    required this.totalTime,
     required this.avgTime,
     required this.avgPace,
+    required this.workouts,
   });
 
   @override
@@ -221,7 +254,7 @@ class HomeTab extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.all(10.0),
                           child: Text(
-                            '${totalKilometer.toStringAsFixed(2)}',
+                            '${totalKilometer.toStringAsFixed(2)} Km',
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -232,7 +265,7 @@ class HomeTab extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(bottom: 20.0),
                           child: Text(
-                            'Total Kilometers',
+                            'Total Distance',
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -258,7 +291,7 @@ class HomeTab extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
-                                      '$heartRate.0',
+                                      _formatTime(totalTime.toInt()),
                                       style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
@@ -267,7 +300,7 @@ class HomeTab extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    'Speed',
+                                    'Total Time',
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: Colors.white,
@@ -287,7 +320,7 @@ class HomeTab extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
-                                      '$totalSteps.0',
+                                      '$workouts',
                                       style: TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
@@ -296,7 +329,7 @@ class HomeTab extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    'RPM',
+                                    'Workouts',
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: Colors.white,
@@ -319,7 +352,7 @@ class HomeTab extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
-                                      '${avgTime.toStringAsFixed(2)}%',
+                                      _formatTime((avgTime).toInt()),
                                       style: TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
@@ -328,7 +361,7 @@ class HomeTab extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    'Incline',
+                                    'Average Time',
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: Colors.white,
@@ -357,7 +390,7 @@ class HomeTab extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    'Avg Pace',
+                                    'Avg Pace (km/h)',
                                     style: TextStyle(
                                       fontSize: 16,
                                       color: Colors.white,
@@ -378,6 +411,14 @@ class HomeTab extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    String minutesStr = minutes.toString().padLeft(2, '0');
+    String secondsStr = remainingSeconds.toString().padLeft(2, '0');
+    return '$minutesStr:$secondsStr';
   }
 }
 
