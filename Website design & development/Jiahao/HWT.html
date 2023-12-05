@@ -3,6 +3,7 @@
     <Head>
         <title>Wearable Technology Homepage</title>
         <link rel="stylesheet" href="HWTstyle.css">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
         </Head>
         <body>
         <h1>Redback Operation</h1>
@@ -24,7 +25,21 @@
                 <p4>More way to shop: visist Redback <p2>purchase page</p2> or visit our <p3>retailers</p3>, or call 100-000. Copy rights Redback Operation 2023, all rights reserved. </p4>
             </div>
             <img src="image4.png" alt="image4">
-            <button class="help" type="button">Need Help?</button>
+            <button id="open-button">Need Help?</button>
+            <div id="overlay">
+                <section class="popUp">
+                    <div class="popUp-header">
+                        <span id="close">&times;</span>
+                        <i class="far fa-comment-alt" style="font-size:28px"></i>
+                        </div>
+                        <div class="popUp-main"></div>
+                        <form class="popUp-footer">
+                            <input type="text" placeholder="Write your message here...">
+                            <button type="submit" class="send-btn">Send</button>
+                        </form>
+                </section>
+            </div>
+            <script src="/HWTjs.js"></script>
             </body>
         
 </html>
