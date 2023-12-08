@@ -5,19 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="login.css">
     <title>Login Page</title>
+    
 </head>
 <body>
     <div class="LoginpageZiyi">
         <div class="Rectangle12"></div>
-        <div class="EnterYourPassword">Enter your password</div>
+        <div class="EnterYourPassword">
+            <label class="input-label" id="passwordLabel" for="password" onclick="handleLabelClick('passwordLabel', 'password')">Enter your password</label>
+            <input type="password" id="password" class="input-field" placeholder="" oninput="handleInput('passwordLabel', 'password')">
+        </div>
         <div class="RememberMeWhenLoginIn">Remember me when login in</div>
         <img class="RedbackLogo7" src="redbacklogo.png" alt="Logo">
         <div class="Frame1"></div>
         <div class="WelcomeTo">Welcome to</div>
-        <div class="Email">Email</div>
+        <div class="Email">Email
+            
+        </div>
         <div class="Password">Password</div>
         <div class="LoginYourAccount">Login your account</div>
-        <div class="EnterYourEmail">Enter your email</div>
+        <div class="EnterYourEmail">
+            <label class="input-label" id="emailLabel" for="email" onclick="handleLabelClick('emailLabel', 'email')">Enter your email</label>
+            <input type="text" id="email" class="input-field" placeholder="" oninput="handleInput('emailLabel', 'email')">
+        </div>
         <div class="Help">Help</div>
         <div class="Line2"></div>
         <div class="Line1"></div>
@@ -28,11 +37,15 @@
         <img class="Check1" src="check.png" alt="Check 1">
         <div class="Rectangle13"></div>
         <div class="Rectangle14"></div>
-        <div class="SignUp">Sign up</div>
-        <div class="Login">Login</div>
+        <button class="SignUp" onclick="location.href='your-signup-url.html'">Sign up</button>
+        <button class="Login" onclick="location.href='your-login-url.html'">Login</button>
         <div class="ForgotPassword">Forgot password?</div>
         <div class="Line5"></div>
         <div class="WeFocusOnPeopleSHealthAndUsingOurNewestTechnologyHelpsMonitoringEverythingYouNeedToKnow">We focus on people's health and using our newest technology helps monitor everything you need to know</div>
     </div>
+
+    <script src="login.js"></script>
+
+    
 </body>
 </html>

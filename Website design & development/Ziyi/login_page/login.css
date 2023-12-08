@@ -2,6 +2,45 @@ body {
     margin: 0;
 }
 
+
+/* 添加特定的样式以匹配现有的设计 */
+button.SignUp, button.Login {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    text-decoration: underline; 
+}
+
+/* 添加样式以在用户点击后隐藏文本 */
+.input-label {
+    display: inline-block;
+    position: relative;
+    color: inherit;
+    display: flex;
+    align-items: baseline;
+}
+
+.input-label.clicked {
+    display: none;
+}
+
+.input-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;  /* 去掉边框 */
+    outline: none;  /* 去掉输入框默认的轮廓线 */
+    background-color: inherit; /* 使用原有背景颜色 */
+     /* 使用原有字体颜色 */
+    color: #000;
+    padding: 2px;
+    line-height: 1.5;
+}
+
 .LoginpageZiyi {
     width: 1728px;
     height: 1117px;
