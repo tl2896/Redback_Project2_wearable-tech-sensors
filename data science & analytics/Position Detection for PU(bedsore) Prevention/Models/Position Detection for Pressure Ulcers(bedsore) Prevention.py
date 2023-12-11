@@ -216,9 +216,6 @@ print(f"KNN Accuracy (k={best_k}): {knn_accuracy:.4f}")
 
 # ### TensorFlow neural network
 
-# The overall architecture of the neural network includes an input layer with the specified number<br>
-# of features, and the model is initialized with this input layer. Additional layers, such as hidden<br>layers and output layers, would typically be added to the model to complete its architecture.
-# 
 # <b>Epoch Information</b>
 # The training process is performed for 10 epochs.<br>
 # Each epoch represents a complete pass through the entire training dataset.<br>
@@ -239,7 +236,23 @@ print(f"KNN Accuracy (k={best_k}): {knn_accuracy:.4f}")
 # <b>Val_accuracy (Validation Accuracy):</b> The accuracy on the validation<br> set increases from 34.96% in the first epoch to 93.11% in the tenth epoch.<br> This reflects the model's performance on data it has not seen during training.
 # 
 # <b>Test Metrics (After Training)</b>
+# 
 # <b>Test Accuracy:</b> The final accuracy on the test set is reported as 93.34%.<br> This metric provides an assessment of the model's generalization performance on unseen data.
+
+# The overall architecture of the neural network includes an input layer with the specified number<br> of features, and the model is initialized with this input layer. Additional layers, such as hidden<br> layers and output layers, would typically be added to the model to complete its architecture.<br> This is clearly shown in line code 20-37.
+# 
+# 
+# The overall purpose of line code 42-50 seems to be dynamically adding hidden layers to a neural<br> network until the number of hidden units (hidden_units) becomes less than or equal to the specified<br> number of output units (output_units). The decrement of hidden units by 5 in each iteration suggests<br> a gradual reduction in the complexity of the neural network during training.
+# 
+# It is worth noting that the specific context of how this code fits into the larger program or what the neural<br> network is intended for is not provided. The effectiveness and appropriateness of this approach depend<br> on the specific requirements and characteristics of the problem being addressed.
+# 
+# optimizer: This parameter specifies the optimization algorithm to be used during training.<br> In this case, 'adam' is used. Adam (short for Adaptive Moment Estimation) is a popular optimization<br> algorithm that adjusts the learning rates of each parameter individually, providing a good balance between<br> efficiency and effectiveness. Other optimizers include 'sgd' (Stochastic Gradient Descent),<br> 'rmsprop' (Root Mean Square Propagation), etc.
+# 
+# loss: This parameter defines the loss function that the model will use during training. The loss function<br> measures how well the model performs on the training data. 'sparse_categorical_crossentropy' is a specific<br> loss function suitable for classification problems where the labels are integers (like 0, 1, 2, etc.). If your labels<br> were one-hot encoded (binary vectors indicating the class), you would use 'categorical_crossentropy'.
+# 
+# metrics: This parameter specifies the evaluation metric(s) that the model should use during training and testing.<br> In this case, 'accuracy' is chosen. During training, the model's performance will be monitored based on accuracy,<br> and the results will be displayed after each epoch. This is a common metric for classification problems,<br> measuring the proportion of correctly classified samples.
+# 
+# After compiling the model, it is ready for training using the fit method. The model will use the specified optimizer,<br> loss function, and metrics to adjust its weights and biases during the training process. The training process<br> involves forward and backward passes through the network, updating the parameters to minimize the chosen<br> loss function. Once trained, the model can be evaluated on new data, and predictions can be made.
 
 # In[7]:
 
