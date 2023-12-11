@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  /* fonts */
+  --font-atomic-age: "Atomic Age";
+  --font-sf-pro-display: "SF Pro Display";
+  --font-dm-sans: "DM Sans";
+
+  /* font sizes */
+  --font-size-4xs: 9px;
+  --font-size-xl: 20px;
+  --font-size-base: 16px;
+
+  /* Colors */
+  --color-white: #fff;
+  --color-black: #000;
+  --color-gray-100: rgba(255, 255, 255, 0.86);
+  --color-red: #ff0000;
+  --color-darkslategray: #2f4250;
+  --color-sienna: #c06e40;
+
+  /* Paddings */
+  --padding-3xs: 10px;
+
+  /* Border radiuses */
+  --br-137xl: 156px;
+  --br-10xs: 3px;
+  --br-11xs: 2px;
+  --br-7xs: 6px;
+}

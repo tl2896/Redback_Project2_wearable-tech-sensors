@@ -1,0 +1,367 @@
+h2{
+    text-align: center;
+    font-family: cursive;
+    display: block;
+    top:30px;
+    align-items: center;
+}
+
+body{
+    background-color: #F7E7EE;
+}
+
+.navbar ul{
+    list-style-type: none;
+    background-color: #b4b4b7;
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.navbar a{
+    color: rgb(36, 34, 34);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.navbar a:hover{
+    background-color: rgb(225, 223, 223);
+}
+
+.navbar li{
+    float: left;
+}
+
+.Login{
+    position: absolute;
+    right: 10px;
+}
+
+h1{
+    font-family: cursive;
+    font-size: x-large;
+    display: block;
+    left: 70px;
+    position: absolute;
+    top: 9px;
+}
+
+.p1{
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    font-size: small;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: right;
+}
+
+.logo1{
+    display: block;
+    position: absolute;
+    max-width: 55px;
+    max-height: 55px;
+    top: 20px;
+}
+
+.image1{
+    display: block;
+    position: absolute;
+    max-width: 17px;
+    max-height: 35px;
+    right: 70px;
+}
+
+h3{
+    display: block;
+    position: absolute;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: normal;
+    right: 270px;
+    top: 175px;
+}
+
+.image2{
+    display: block;
+    position: absolute;
+    max-width: 380px;
+    top: 275px;
+    left: 50px;
+}
+
+.image3{
+    display: block;
+    position: absolute;
+    max-width: 40px;
+    right: 650px;
+    top: 240px;
+}
+
+.image4{
+    display: block;
+    position: absolute;
+    max-width: 40px;
+    right: 650px;
+    top: 290px;
+}
+
+.image5{
+    display: block;
+    position: absolute;
+    max-width: 40px;
+    right: 650px;
+    top: 340px;
+}
+
+.image6{
+    display: block;
+    position: absolute;
+    max-width: 40px;
+    right: 650px;
+    top: 390px;
+}
+
+.image7{
+    display: block;
+    position: absolute;
+    max-width: 40px;
+    right: 650px;
+    top: 440px;
+}
+
+.image8{
+    display: block;
+    position: absolute;
+    max-width: 40px;
+    right: 650px;
+    top: 490px;
+}
+
+.list1{
+    display: block;
+    position: absolute;
+    top: 225px;
+    right: 320px;
+    text-decoration: underline;
+}
+
+.list2{
+    display: block;
+    position: absolute;
+    top: 280px;
+    right: 265px;
+    text-decoration: underline;
+}
+
+.list3{
+    display: block;
+    position: absolute;
+    top: 325px;
+    right: 305px;
+    text-decoration: underline;
+}
+
+.list4{
+    display: block;
+    position: absolute;
+    top: 380px;
+    right: 305px;
+    text-decoration: underline;
+}
+
+.list5{
+    display: block;
+    position: absolute;
+    top: 435px;
+    right: 255px;
+    text-decoration: underline;
+}
+
+.list6{
+    display: block;
+    position: absolute;
+    top: 490px;
+    right: 300px;
+    text-decoration: underline;
+}
+
+.notice{
+    text-decoration: none;
+    display: block;
+    position: absolute;
+    bottom: 20%;
+    right: 6%;
+    font-size: small;
+}
+
+.dl{
+    font-size: smaller;
+    display: block;
+    position: absolute;
+    bottom: 1%;
+    right: 300px;
+}
+
+#open-button{
+    background-color:#555;
+    color:white;
+    padding:18px;
+    position:fixed;
+    bottom: 20px;
+    right:20px;
+    letter-spacing: 1px;
+    outline:none;
+    border: none;
+    cursor:pointer;
+    transition: .5s;
+}
+
+#open-button:hover{
+    background-color: #333;
+}
+
+#overlay{
+    width:100vw;
+    height:100vh;
+    /*display: none;*/
+    position:fixed;
+}
+
+.popUp{
+    display: flex;
+    flex-flow: column wrap;
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    max-width: 100%;
+    height: calc(100% - 40%);
+}
+
+.popUp-header{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 10px;
+    background: #fff;
+    color:#777;
+   border-bottom: 1px solid rgb(191,191,191);
+}
+
+#close{
+    position: absolute;
+    right: 12px;
+    top: 3px;
+    border: none;
+    transition: .25s linear;
+    outline:none;
+    background-color: transparent;
+    color: #777;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+#close:hover,
+#close:focus{
+    color: rgb(0,0,0);
+    animation: rotation 1s alternate;
+}
+
+@keyframes rotation{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.popUp-main{
+    flex: 1;
+    padding: 10px;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+.msg{
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
+.chat-img{
+    width:50px;
+    height: 50px;
+    margin-right: 10px;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.chat-bubble{
+    max-width: 450px;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+
+.chat-name{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
+    font-weight: bold;
+}
+
+.comp-msg .chat-bubble{
+    border-bottom-left-radius: 0;
+    background: rgb(177,175,175);
+
+}
+
+.client-msg{
+    flex-direction: row-reverse;
+}
+
+.client-msg .chat-bubble{
+    background: dodgerblue;
+    color: #fff;
+    border-bottom-right-radius: 0;
+}
+
+.client-msg .chat-img{
+    margin: 0 0 0 10px;
+}
+
+.popUp-footer{
+    display: flex;
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid rgb(191,191,191);
+}
+
+.popUp-footer *{
+    padding: 10px;
+    border:none;
+    outline:none;
+}
+
+input{
+    flex: 1;
+    background: rgb(212,208,208);
+}
+
+.send-btn{
+    margin-left: 10px;
+    background: rgb(0,0,0);
+    color: #fff;
+    cursor: pointer;
+    transition: .8s;
+}
+
+.send-btn:hover{
+    box-shadow: inset 0 0 0 2em #00b637;
+}
+
