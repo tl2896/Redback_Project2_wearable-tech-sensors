@@ -8,7 +8,8 @@ import pandas as pd
 import numpy as np
 
 # Read a comma-separated values (csv) file into DataFrame
-df_data = pd.read_csv(r"C:/Users/Inca/Documents/Australia/Deakin/2023/T3 2023/datasets/PressureUlcers.csv")
+df_data = pd.read_csv(r"C:/Users/Inca/Documents/Australia/Deakin/2023/T3 2023/datasets/PressureUlcers_AdditionalData_1.csv")
+#df_data = pd.read_csv(r"C:/Users/Inca/Documents/Australia/Deakin/2023/T3 2023/datasets/PressureUlcers_AdditionalData_1.csv")
 
 
 # In[2]:
@@ -166,10 +167,6 @@ import tensorflow as tf
 from tensorflow.keras import layers, models
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
-# Load the dataset
-# Replace 'your_dataset.csv' with the actual path to your dataset
-#df = pd.read_csv('your_dataset.csv')
-
 # Extract features (X) and labels (y)
 X = data_norm[['Ax', 'Ay', 'Az', 'Mx', 'My', 'Mz']]
 y = data_norm['Label']
@@ -241,6 +238,81 @@ disp.plot(cmap='Blues', values_format=".2f")
 plt.title('Confusion Matrix')
 plt.show()
 
+# Print the position predictions
+print("Position Predictions:")
+print(y_pred)
+
+
+# In[9]:
+
+
+from tensorflow import keras
+
+# Define the model architecture
+num_features = X_train.shape[1]
+hidden_units = 10
+output_units = len(np.unique(y))
+
+model = models.Sequential()
+model.add(layers.InputLayer(input_shape=(num_features,)))
+
+while hidden_units > output_units:
+    model.add(layers.Dense(hidden_units, activation='relu'))
+    hidden_units -= 5
+
+model.add(layers.Dense(output_units, activation='softmax'))
+
+lr_schedule = keras.optimizers.schedules.ExponentialDecay(
+    initial_learning_rate=1e-2,
+    decay_steps=10000,
+    decay_rate=0.9)
+optimizer = keras.optimizers.SGD(learning_rate=lr_schedule)
+
+# Compile the model
+model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+# Train the model
+history = model.fit(X_train, y_train, epochs=10, batch_size=32, validation_split=0.2)
+
+# Visualize training history
+plt.figure(figsize=(12, 6))
+
+# Plot training & validation accuracy values
+plt.subplot(1, 2, 1)
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.title('Model accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend(['Train', 'Validation'], loc='upper left')
+
+# Plot training & validation loss values
+plt.subplot(1, 2, 2)
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('Model loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.legend(['Train', 'Validation'], loc='upper left')
+
+plt.tight_layout()
+plt.show()
+
+# Evaluate the model on the test set
+test_loss, test_accuracy = model.evaluate(X_test, y_test)
+print(f'Test Accuracy: {test_accuracy * 100:.2f}%')
+
+# Make predictions on the test set
+y_pred = np.argmax(model.predict(X_test), axis=1)
+
+# Create and plot the confusion matrix
+cm = confusion_matrix(y_test, y_pred, normalize='true')
+labels = np.unique(y)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
+disp.plot(cmap='Blues', values_format=".2f")
+plt.title('Confusion Matrix')
+plt.show()
+
 # Make predictions on new data
 # Replace 'new_data' with the actual input data for which you want to make predictions
 #new_data = pd.DataFrame({'Ax': [-1.33], 'Ay': [1.1], 'Az': [9.65], 'Mx': [43.27], 'My': [1.09], 'Mz': [-57.76], 'Ch': [1.44]})
@@ -251,6 +323,12 @@ plt.show()
 # Print the position predictions
 print("Position Predictions:")
 print(y_pred)
+
+
+# In[10]:
+
+
+cm
 
 
 # In[ ]:
