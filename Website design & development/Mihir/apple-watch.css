@@ -1,0 +1,443 @@
+.apple-watch-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #F7E7EE;
+  width: 838px;
+  height: 965px;
+}
+.apple-watch-item {
+  position: absolute;
+  top: 590.4px;
+  left: 319.9px;
+  width: 87.2px;
+  height: 16px;
+}
+.frame-child {
+  top: 0;
+  left: 0;
+  border-radius: 218px;
+  width: 413px;
+}
+.frame-child,
+.frame-item,
+.vector-parent {
+  position: absolute;
+  height: 670px;
+}
+.frame-item {
+  top: 0;
+  left: 190px;
+  border-radius: 0 206.5px 206px 0;
+  background-color: #F7E7EE;
+  width: 223px;
+}
+.vector-parent {
+  top: 4.2px;
+  left: 0;
+  width: 413px;
+}
+.pexels-cottonbro-studio-505454-icon {
+  position: absolute;
+  top: 0;
+  left: 107px;
+  width: 409px;
+  height: 703.2px;
+  object-fit: cover;
+}
+.img {
+  position: absolute;
+  top: 142.8px;
+  left: 645px;
+  width: 516px;
+  height: 703.2px;
+}
+.the-latest-smart {
+  color: var(--color-black);
+}
+.span {
+  color: var(--color-red);
+}
+.discover-the-latest-container1 {
+  line-break: anywhere;
+  width: 100%;
+}
+.discover-the-latest-container {
+  position: absolute;
+  top: 209px;
+  left: 121px;
+  font-size: 67px;
+  letter-spacing: 0.01em;
+  line-height: 76px;
+  display: flex;
+  align-items: center;
+  width: 483px;
+  height: 209px;
+  color: var(--color-darkslategray);
+}
+.inspired-by-the,
+.order-now {
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+}
+.inspired-by-the {
+  position: absolute;
+  top: 456px;
+  left: 125px;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+  color: var(--color-black);
+  width: 479px;
+  height: 65px;
+}
+.order-now {
+  position: relative;
+  font-weight: 500;
+  width: 82px;
+  height: 15px;
+  flex-shrink: 0;
+}
+.explore-now,
+.order-now-wrapper {
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+.order-now-wrapper {
+  top: 554px;
+  left: 125px;
+  border-radius: var(--br-7xs);
+  background-color: var(--color-sienna);
+  flex-direction: row;
+  justify-content: center;
+  padding: 18px 37px;
+}
+.explore-now {
+  top: 575px;
+  left: 315px;
+  line-height: 26px;
+  font-weight: 500;
+  color: #402e2e;
+  width: 98px;
+  height: 14px;
+}
+.small-watch-child,
+.small-watch-item {
+  position: absolute;
+  border-radius: var(--br-7xs);
+  width: 216px;
+  height: 216px;
+}
+.small-watch-child {
+  top: 0;
+  left: 0;
+  border: 1px solid #fa6363;
+  box-sizing: border-box;
+}
+.small-watch-item {
+  top: 13px;
+  left: 14px;
+  background-color: var(--color-sienna);
+  box-shadow: 3px 5px 35px 8px rgba(192, 110, 64, 0.3);
+}
+.pngwing-1-icon {
+  position: absolute;
+  top: 18px;
+  left: 14px;
+  width: 224px;
+  height: 207px;
+  object-fit: cover;
+}
+.small-watch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 238px;
+  height: 229px;
+}
+.frame-inner,
+.group-icon {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  width: 146px;
+  height: 59px;
+}
+.group-icon {
+  top: 46px;
+  left: 42px;
+  width: 148px;
+  height: 57px;
+}
+.apple-watch-series,
+.applewatch-6th-gen {
+  position: absolute;
+  top: 0;
+  left: 4px;
+  letter-spacing: 0.01em;
+  line-height: 26px;
+  display: flex;
+  align-items: center;
+  width: 140px;
+  height: 14px;
+}
+.apple-watch-series {
+  top: 39px;
+  left: 9px;
+  font-size: var(--font-size-4xs);
+  letter-spacing: 0.06em;
+  line-height: 13px;
+  font-weight: 500;
+  color: #352121;
+  width: 172px;
+  height: 45px;
+}
+.group-parent,
+.watch {
+  position: absolute;
+  top: 60px;
+  left: 261px;
+  width: 188px;
+  height: 103px;
+}
+.watch {
+  top: 696px;
+  left: 133px;
+  width: 449px;
+  height: 229px;
+  font-size: 14px;
+  color: #3d1f1f;
+}
+.nav-bar-child {
+  position: absolute;
+  top: 61px;
+  left: 821px;
+  border-radius: var(--br-10xs);
+  background-color: var(--color-red);
+  width: 44px;
+  height: 3px;
+}
+.home {
+  position: relative;
+}
+.home-parent {
+  position: absolute;
+  top: 30px;
+  left: 810px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-3xs) 0 var(--padding-3xs) var(--padding-3xs);
+  gap: 45px;
+}
+.menu-bar-child,
+.menu-bar-item {
+  left: 0;
+  border-radius: var(--br-11xs);
+  background-color: #F7E7EE;
+  height: 4px;
+}
+.menu-bar-child {
+  position: absolute;
+  top: 0;
+  width: 18px;
+}
+.menu-bar-item {
+  top: 7px;
+}
+.menu-bar,
+.menu-bar-inner,
+.menu-bar-item {
+  position: absolute;
+  width: 18px;
+}
+.menu-bar-inner {
+  top: 14px;
+  left: 0;
+  border-radius: var(--br-11xs);
+  background-color: var(--color-white);
+  height: 4px;
+}
+.menu-bar {
+  top: 41px;
+  left: 1200px;
+  height: 18px;
+}
+.image-1-icon,
+.whatsapp-image-2023-11-28-at-01 {
+  position: absolute;
+  top: 0;
+  left: 2px;
+  width: 101px;
+  height: 101px;
+  object-fit: cover;
+}
+.whatsapp-image-2023-11-28-at-01 {
+  top: 5px;
+  left: 0;
+  border-radius: var(--br-137xl);
+  width: 120px;
+  height: 96px;
+}
+.hear-rate-meter-child,
+.nav-bar {
+  position: absolute;
+  top: 0;
+  left: 102px;
+  width: 1218px;
+  height: 101px;
+}
+.hear-rate-meter-child {
+  left: 0;
+  border-radius: var(--br-10xs);
+  background-color: var(--color-white);
+  width: 39px;
+  height: 39px;
+}
+.frame-icon {
+  position: absolute;
+  top: 4.7px;
+  left: 2.4px;
+  width: 34.3px;
+  height: 34.3px;
+  overflow: hidden;
+}
+.hear-rate-meter {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 39px;
+  height: 39px;
+}
+.heart-meter,
+.heart-rate-monitor {
+  position: absolute;
+  top: 0;
+  left: 56px;
+  display: flex;
+  align-items: center;
+  width: 123px;
+  height: 16px;
+}
+.heart-rate-monitor {
+  top: 25px;
+  left: 55px;
+  font-size: var(--font-size-4xs);
+  color: var(--color-white);
+  width: 166px;
+  height: 36px;
+}
+.heart-beat,
+.location-child {
+  position: absolute;
+  top: 85px;
+  left: 12px;
+  width: 221px;
+  height: 61px;
+}
+.location-child {
+  top: 4px;
+  left: 0;
+  border-radius: var(--br-10xs);
+  background-color: var(--color-white);
+  width: 39px;
+  height: 39px;
+}
+.location-tracker {
+  position: absolute;
+  top: 0;
+  left: 56px;
+  display: flex;
+  align-items: center;
+  width: 166px;
+  height: 16px;
+}
+.location,
+.stop-watch-icon {
+  position: absolute;
+  top: 201px;
+  left: 11px;
+  width: 222px;
+  height: 61px;
+}
+.stop-watch-icon {
+  top: 317px;
+  left: 1px;
+  width: 55px;
+  height: 55px;
+}
+.about-our-product {
+  position: absolute;
+  top: 17px;
+  left: 0;
+  font-size: 27px;
+  display: flex;
+  color: #fefefe;
+  align-items: center;
+  width: 251px;
+  height: 34px;
+}
+.rectangle-div {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  border-radius: 4px;
+  background-color: #fbb;
+  width: 32px;
+  height: 4px;
+}
+.heart-beat-parent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 251px;
+  height: 372px;
+}
+.heart-rate-monitor2,
+.stop-watch {
+  position: absolute;
+  top: 317px;
+  left: 70px;
+  display: flex;
+  align-items: center;
+  width: 123px;
+  height: 16px;
+}
+.heart-rate-monitor2 {
+  top: 342px;
+  left: 69px;
+  font-size: var(--font-size-4xs);
+  color: var(--color-white);
+  width: 166px;
+  height: 36px;
+}
+.about-product {
+  position: absolute;
+  top: 293px;
+  left: 1072px;
+  width: 251px;
+  height: 378px;
+  font-size: var(--font-size-xl);
+  color: var(--color-gray-100);
+}
+.frame-icon1 {
+  position: absolute;
+  top: 500px;
+  left: 1083px;
+  width: 37px;
+  height: 37px;
+  overflow: hidden;
+}
+.apple-watch {
+  position: relative;
+  background-color: var(--color-darkslategray);
+  width: 100%;
+  height: 965px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-white);
+  font-family: var(--font-dm-sans);
+}
