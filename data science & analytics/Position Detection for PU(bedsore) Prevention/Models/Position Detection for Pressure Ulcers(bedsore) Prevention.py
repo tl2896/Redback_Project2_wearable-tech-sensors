@@ -28,6 +28,15 @@ df_data.info()
 data_norm = df_data.copy()
 
 
+# ### Data display
+# 
+# - Cod_pat is the unique code for each person;
+# - Time is the timestamp;
+# - Ax, Ay, Az represent the axis of the acceleration;
+# - Mx, My, Mz represent the axis of the magnetometer;
+# - Ch is the compass heading;
+# - Label is the Class that provide the activity of the person.<br>It is recording the body position while performing five physical activities such as:<br>staying seated, prone, supine, laying on the right and left, and in motion.<br>It is represented like 0, 1, 2, 3, 4, 5.
+
 # In[3]:
 
 
@@ -35,6 +44,29 @@ df_data
 
 
 # ### SVM and Classification Report
+
+# <b>Accuracy</b><br>
+# The overall accuracy of the SVM model on the test set is approximately 98.34%.
+# 
+# <b>Confusion Matrix</b><br>
+# The confusion matrix provides a detailed breakdown of correct and incorrect<br> predictions for each class.
+# Most of the diagonal elements have high values,<br> indicating correct predictions.
+# Off-diagonal elements are mostly zeros, suggesting<br> few misclassifications.
+# 
+# <b>Classification Report</b><br>
+# <b>Precision:</b> The model's ability to correctly classify instances of each class is high,<br> as indicated by high precision values.<br>
+# <b>Recall:</b> The recall (sensitivity) values are also high, indicating that the model<br> captures most instances of each class.<br>
+# <b>F1-score:</b> The harmonic mean of precision and recall is high, indicating a good<br> balance between precision and recall.<br>
+# <b>Support:</b> The number of actual occurrences of each class in the test set.
+# 
+# <b>Individual Class Performance</b><br>
+# Class 0, 1, 2, and 3: Perfect precision, recall, and F1-score.<br>
+# Class 4: Slightly lower precision, indicating a few false positives.<br>
+# Class 5: Lower recall and F1-score, suggesting that the model struggles more<br> with this class.<br>
+# 
+# <b>Macro and Weighted Averages:</b><br>
+# Macro avg: The average precision, recall, and F1-score across all classes.<br> It is high, indicating good overall performance.<br>
+# Weighted avg: The weighted average based on the number of true instances for each class. If it is high, it means that it is a well-performing model.
 
 # In[4]:
 
@@ -68,6 +100,16 @@ print("Accuracy:", accuracy)
 print("Confusion Matrix:\n", conf_matrix)
 print("Classification Report:\n", class_report)
 
+
+# ### GridSearchCV to tune hyperparameters
+
+# This code essentially performs hyperparameter tuning for an SVM model<br>using a grid search approach and evaluates the final model on a test dataset.
+# 
+# <b>Standard scaling</b> is applied to the features using StandardScaler to ensure<br>that all features have the same scale.
+# 
+# <b>param_grid</b> is a dictionary containing lists of hyperparameter values to search over.<br>In this case, it includes different values for the regularization parameter C<br>and the kernel coefficient gamma.
+# 
+# <b>GridSearchCV</b> is used to perform a grid search with cross-validation<br> (6-fold cross-validation in this case) to find the best combination of hyperparameters<br> for the Support Vector Machine (SVM) model with a radial basis function (RBF) kernel.
 
 # In[5]:
 
@@ -121,6 +163,11 @@ print(classification_rep)
 
 # ### KNN model
 
+# The KNN model achieved a perfect accuracy of 1.0000 on the test<br> set when using the best k value, which is 1.
+# An accuracy of 1.0000<br> indicates that all instances in the test set were correctly classified<br> by the model.
+# The choice of k is a crucial hyperparameter in KNN,<br> and in this case, the model performed best with the nearest neighbor<br> approach (k=1).
+# It is important to note that achieving perfect accuracy<br> may raise questions about overfitting, and further evaluation and validation<br> on unseen data could provide a more comprehensive understanding of the<br> model's generalization performance.
+
 # In[6]:
 
 
@@ -168,6 +215,31 @@ print(f"KNN Accuracy (k={best_k}): {knn_accuracy:.4f}")
 
 
 # ### TensorFlow neural network
+
+# The overall architecture of the neural network includes an input layer with the specified number<br>
+# of features, and the model is initialized with this input layer. Additional layers, such as hidden<br>layers and output layers, would typically be added to the model to complete its architecture.
+# 
+# <b>Epoch Information</b>
+# The training process is performed for 10 epochs.<br>
+# Each epoch represents a complete pass through the entire training dataset.<br>
+# For each epoch, training and validation metrics are provided, including loss and accuracy.
+# 
+# <b>The training history is visualised with two plots:</b>
+# - <b>Model Accuracy</b>: Both training and validation accuracy increase over epochs,<br> indicating that the model is learning from the training data and generalizing<br> well to the validation set.
+# - <b>Model Loss</b>: Both training and validation loss decrease, showing that the model<br> is improving in minimizing the sparse categorical cross-entropy loss function.
+# 
+# <b>Training Metrics (Epochs 1-10)</b>
+# <b>Training Loss:</b> The training loss decreases from 1.9950<br> in the first epoch to 0.3708 in the tenth epoch. A decreasing loss indicates that the model<br> is improving in fitting the training data.
+# 
+# <b>Accuracy:</b> The training accuracy increases from 14.00% in the first epoch to 92.70% in the<br> tenth epoch. This shows the percentage of correctly classified samples in the training data.
+# 
+# <b>Validation Metrics (Epochs 1-10)</b>
+# <b>Val_loss (Validation Loss):</b> The loss on the validation<br> set decreases from 1.6421 in the first epoch to 0.3463 in the tenth epoch. Similar to training loss,<br> decreasing validation loss is a positive sign.
+# 
+# <b>Val_accuracy (Validation Accuracy):</b> The accuracy on the validation<br> set increases from 34.96% in the first epoch to 93.11% in the tenth epoch.<br> This reflects the model's performance on data it has not seen during training.
+# 
+# <b>Test Metrics (After Training)</b>
+# <b>Test Accuracy:</b> The final accuracy on the test set is reported as 93.34%.<br> This metric provides an assessment of the model's generalization performance on unseen data.
 
 # In[7]:
 
@@ -262,7 +334,32 @@ print(f'Test Accuracy: {test_accuracy * 100:.2f}%')
 # Step 8: Make predictions on the test set
 y_pred = np.argmax(model.predict(X_test), axis=1)
 
-# Step 9: Create and plot the confusion matrix
+
+# ### Confusion Matrix
+
+# The confusion matrix provides a detailed breakdown of model predictions on the test set across different classes.<br> It is visualized using the ConfusionMatrixDisplay from scikit-learn. This is a normalized confusion matrix.<br> Each row corresponds to the true class, and each column corresponds to the predicted class.<br> The values in the matrix are normalized, meaning they represent the fraction of true instances for each class that<br> were correctly or incorrectly predicted.
+# 
+# This allows you to see how well the model is performing for each class, including any potential misclassifications.
+# 
+# Here is how to interpret the confusion matrix:
+# - <b>Diagonal Elements (Top-left to Bottom-right):</b>
+#   - The values on the diagonal (e.g., 0.97807018, 1.0, 1.0, 0.99494949, 1.0) represent the accuracy for<br>each class. These are the proportions of correctly classified instances for each class.
+# - <b>Off-diagonal Elements:</b>
+#   - The non-zero values off the diagonal (e.g., 0.02192982, 0.00505051, 0.03809524, 0.00952381) indicate<br> misclassifications between different classes. For example, in the first row, third column (0.02192982)<br> indicates the proportion of instances of class 1 that were misclassified as class 3.
+#   
+# <b>Interpretation of Specific Values</b>
+# Example: The value 0.00505051 in the fourth row, first column suggests<br> that approximately 0.5% of instances of class 3 were misclassified as class 1.
+# 
+# <b>Class Imbalances</b>
+# If the number of instances varies significantly between classes, misclassification rates might<br> not provide a complete picture. It could be helpful to consider precision, recall, or F1-score for a more<br> detailed assessment.
+# 
+# <b>Overall Performance</b>
+# The diagonal values should be high, and off-diagonal values should be low for a<br> well-performing model.
+
+# In[8]:
+
+
+# Create and plot the confusion matrix
 cm = confusion_matrix(y_test, y_pred, normalize='true')
 labels = np.unique(y)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=labels)
@@ -270,7 +367,17 @@ disp.plot(cmap='Blues', values_format=".2f")
 plt.title('Confusion Matrix')
 plt.show()
 
-# Step 10: Print the position predictions
+
+# In[9]:
+
+
+# Print the position predictions
 print("Position Predictions:")
 print(y_pred)
+
+
+# In[ ]:
+
+
+
 
