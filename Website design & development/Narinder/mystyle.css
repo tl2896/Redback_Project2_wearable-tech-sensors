@@ -1,0 +1,14 @@
+body{
+    background: url(http://mymaplist.com/img/parallax/back.png);
+  background-color:#F7E7EE;
+    background: url(http://mymaplist.com/img/parallax/pinlayer2.png),url(http://mymaplist.com/img/parallax/pinlayer1.png),url(http://mymaplist.com/img/parallax/back.png);    
+}
+    .container {
+        margin-top: 50px;
+    }
+    h2 {
+        color: #007bff;
+    }
+    .instruction {
+        margin-bottom: 20px;
+    }
