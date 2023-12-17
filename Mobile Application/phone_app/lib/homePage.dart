@@ -173,6 +173,14 @@ class _HomePageState extends State<HomePage> {
       time += workout['time'];
       avgPace += double.parse(workout["avgPace"]);
     }
+    if (distance == 0 || totalTime == 0) {
+      totalKilometer = 0;
+      totalTime = 0;
+      totalAvgPace = 0;
+      totalAvgTime = 0;
+      totalWorkouts = 0;
+      return;
+    }
     totalKilometer = distance;
     totalTime = time;
     totalAvgPace = avgPace / counter;
@@ -254,7 +262,7 @@ class HomeTab extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.all(10.0),
                           child: Text(
-                            '${totalKilometer.toStringAsFixed(2)} Km',
+                            '${totalKilometer.toStringAsFixed(2) ?? 0} Km',
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -291,7 +299,7 @@ class HomeTab extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
-                                      _formatTime(totalTime.toInt()),
+                                      _formatTime(totalTime.toInt() ?? 0),
                                       style: const TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
@@ -352,7 +360,7 @@ class HomeTab extends StatelessWidget {
                                   Padding(
                                     padding: EdgeInsets.all(8.0),
                                     child: Text(
-                                      _formatTime((avgTime).toInt()),
+                                      _formatTime((avgTime).toInt() ?? 0),
                                       style: TextStyle(
                                         fontSize: 24,
                                         fontWeight: FontWeight.bold,
