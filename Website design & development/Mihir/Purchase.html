@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .watch-container {
+      max-width: 600px;
+      margin: auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .product-select {
+      margin-bottom: 10px;
+    }
+
+    .quantity-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .quantity-btn {
+      cursor: pointer;
+      font-size: 18px;
+      padding: 5px 10px;
+      margin: 0 5px;
+    }
+
+    #quantity-display {
+      font-size: 16px;
+      margin: 0 10px;
+    }
+
+    #purchase-btn {
+      padding: 10px 15px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="watch-container">
+    <h2>Watch Purchase</h2>
+
+    <div class="product-select">
+      <label for="watch-select">Select a Watch:</label>
+      <select id="watch-select">
+        <option value="watch1">Elegant Watch - $150</option>
+        <option value="watch2">Sporty Watch - $200</option>
+        <option value="watch3">Classic Watch - $180</option>
+      </select>
+    </div>
+
+    <div class="quantity-container">
+      <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+      <span id="quantity-display">1</span>
+      <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+    </div>
+
+    <button id="purchase-btn" onclick="purchase()">Purchase</button>
+  </div>
+
+  <script>
+    let quantity = 1;
+
+    function increaseQuantity() {
+      quantity++;
+      updateQuantityDisplay();
+    }
+
+    function decreaseQuantity() {
+      if (quantity > 1) {
+        quantity--;
+        updateQuantityDisplay();
+      }
+    }
+
+    function updateQuantityDisplay() {
+      document.getElementById('quantity-display').innerText = quantity;
+    }
+
+    function purchase() {
+      const selectedWatch = document.getElementById('watch-select').value;
+      alert(`Order placed for ${quantity} ${selectedWatch}! (Note: This is a demo, no actual order is processed)`);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+
+
+
+Project Goals:
+
+The purpose of this feature is to upgrade current wearable devices designed for seniors, with a focus on improving health monitoring functions. Leveraging the groundwork laid by previous teams, these wearables can record and transmit data while sending alerts for values that go beyond safe limits. 
+
+My enhancement plan aims to make these devices more intelligent. This involves refining data collection related to seniors' health and lifestyle and implementing analytics to predict the likelihood of specific health conditions in the elderly, such as Cardiovascular Diseases, Arthritis, Osteoporosis, Diabetes, Neurological Disorders, and Respiratory Issues. The goal is to proactively address potential health concerns and contribute to the overall well-being of the elderly population.
+
+I started with cardiovascular diseases, and more specifically, heart attacks. My goal is to predict the chance of people getting heart attacks by leveraging data science.
+
+
+File Inventory:
+
+I have an analysis report, and it is a comprehensive version of my work. If you do not have time, only reading that should be sufficient. It is the best model I found.
+
+As indicated in the name: one folder contains models using one dataset. I had to switch to the second dataset for the same problem because the second dataset could produce predictions with higher accuracy.
+
+The first dataset is from: 
+https://www.kaggle.com/datasets/colewelkins/cardiovascular-disease
+
+The second dataset is from: 
+https://www.kaggle.com/datasets/kamilpytlak/personal-key-indicators-of-heart-disease/data
+
+First_dataset_cardiovascular: 
+Contains various models using the first dataset (model names are in file names)
+
+Second_dataset_heartAttack (more important): 
+Contains various models using the second dataset (model names are in file names)
+
+
+File Interrelations:
+
+Python scripts in the First_dataset_cardiovascular are all standalone models.
+
+While in the Second_dataset_heartAttack:
+
+I Constructed 3 models including random forest, feedforward neural network (FNN), and ensemble model (FNN, XGBoost, and logistic regression);
+
+After setting the baseline using the first 3 models, I implemented different methods to improve modal performance by mitigating the issue of data imbalance, using techniques including synthetic minority over-sampling technique (SMOTE), majority under-sampling, AdaBoost, PCA, and interaction terms.
+
+
+Project Status:
+
+To implement my model, the team needs to record customers’ data. The dataset I used here was retrieved from a survey conducted by CDC (Centers for Disease Control and Prevention). Therefore, while some of the data can be detected by a wearable sensor, others need to be entered by the customer or a medical professional. Data imbalance issue is common in this type of prediction, the team should carefully check the data distribution before selecting models.
+
+The team may also start working on other disease predictions, as listed in the project objective. For example, diabetes is highly related to a person’s lifestyle and previous health issues. If the team can find relevant data, it would be possible to monitor a customer's health condition and offer recommendations regarding dietary choices and exercise regimens.

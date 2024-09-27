@@ -1,1 +1,23 @@
+- work in progress.
+  Link to demontration video: https://youtu.be/tZsehD-IF3w
 
+This application is written in Dart for the Flutter framework.
+
+Current status of the project:
+
+- working GPS tracking (test pattern runs, actuall location tracking code has been commented for testing of data logging)
+- user Authentication via Firebase user authentication
+- data logging via Firestore database
+- working results page
+- working dashboard view
+
+Features to implement:
+
+- redesign UI to match web sites design color pallet and element design
+- Link with social media
+- log data such as: (these are for the data moddeling team, to assist in injury prevention)
+  - users feeling prior/post workout
+  - user height/weight
+  - log any imjuries sustained
+  - log sleep data
+- fall detection

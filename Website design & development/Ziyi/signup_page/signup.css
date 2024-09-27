@@ -1,0 +1,341 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #F7E7EE;
+  }
+  
+  
+   .SignuppageZiyi {
+    width: 1728px;
+    height: 1117px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #F7E7EE;
+}
+  
+  .Rectangle12 {
+    width: 1464px;
+    height: 838px;
+    left: 137px;
+    top: 131px;
+    position: absolute;
+    mix-blend-mode: darken;
+    background: #F7E7EE;
+  }
+  
+  .Checkmark3 {
+    width: 39px;
+    height: 35px;
+    left: 1397px;
+    top: 602px;
+    position: absolute;
+  }
+  
+  .EnterYourEmail {
+    width: 211px;
+    height: 38px;
+    left: 896px;
+    top: 517px;
+    position: absolute;
+    text-align: center;
+    color: #D3CACA;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .EnterYourPassword {
+    width: 211px;
+    height: 38px;
+    left: 916px;
+    top: 606px;
+    position: absolute;
+    text-align: center;
+    color: #D3CACA;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .BySigningUpIArgeeTermsConditions {
+    left: 967px;
+    top: 688px;
+    position: absolute;
+    text-align: center;
+  }
+  
+  .BySigningUpIArgeeTermsConditions span {
+    color: #B1AAAA;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .BySigningUpIArgeeTermsConditions span:last-child {
+    color: #52A6B8;
+  }
+  
+  .RedbackLogo7 {
+    width: 203px;
+    height: 208px;
+    left: 492px;
+    top: 365px;
+    position: absolute;
+  }
+  
+  .Frame1 {
+    width: 100px;
+    height: 100px;
+    left: 1423px;
+    top: 479px;
+    position: absolute;
+  }
+  
+  .WelcomeTo {
+    width: 261px;
+    height: 66px;
+    left: 463px;
+    top: 281px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 32px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .UserName {
+    width: 261px;
+    height: 66px;
+    left: 849px;
+    top: 365px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .Password {
+    width: 261px;
+    height: 66px;
+    left: 849px;
+    top: 559px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .Email {
+    width: 261px;
+    height: 66px;
+    left: 826px;
+    top: 470px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .CreateYourAccount {
+    width: 319px;
+    height: 66px;
+    left: 992px;
+    top: 279px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 32px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .EnterYourName {
+    width: 211px;
+    height: 38px;
+    left: 899px;
+    top: 425px;
+    position: absolute;
+    text-align: center;
+    color: #D3CACA;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .Help {
+    width: 99px;
+    height: 36px;
+    left: 603px;
+    top: 870px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .Line2 {
+    width: 455px;
+    height: 0px;
+    left: 924px;
+    top: 547px;
+    position: absolute;
+    border: 1px #63AFC0 solid;
+  }
+  
+  .Line3 {
+    width: 455px;
+    height: 0px;
+    left: 924px;
+    top: 636px;
+    position: absolute;
+    border: 1px #63AFC0 solid;
+  }
+  
+  .Line1 {
+    width: 455px;
+    height: 0px;
+    left: 924px;
+    top: 452px;
+    position: absolute;
+    border: 1px #63AFC0 solid;
+  }
+  
+  .About {
+    width: 99px;
+    height: 36px;
+    left: 504px;
+    top: 870px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .Line4 {
+    width: 29px;
+    height: 0px;
+    left: 603px;
+    top: 865px;
+    position: absolute;
+    transform: rotate(90deg);
+    transform-origin: 0 0;
+    border: 1px black solid;
+  }
+  
+  .Checkmark1 {
+    width: 39px;
+    height: 35px;
+    left: 1397px;
+    top: 418px;
+    position: absolute;
+  }
+  
+  .Checkmark2 {
+    width: 39px;
+    height: 35px;
+    left: 1397px;
+    top: 517px;
+    position: absolute;
+  }
+  
+  .Check1 {
+    width: 28px;
+    height: 33px;
+    left: 924px;
+    top: 683px;
+    position: absolute;
+  }
+  
+  .Rectangle13 {
+    width: 154px;
+    height: 58px;
+    left: 967px;
+    top: 770px;
+    position: absolute;
+    background: #9AD3E5;
+    border-radius: 50px;
+  }
+  
+  .Rectangle14 {
+    width: 154px;
+    height: 58px;
+    left: 1234px;
+    top: 771px;
+    position: absolute;
+    background: #D9D9D9;
+    border-radius: 50px;
+  }
+  
+  .SignIn {
+    width: 111px;
+    height: 28px;
+    left: 1255px;
+    top: 786px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .SignUp {
+    width: 111px;
+    height: 28px;
+    left: 987px;
+    top: 785px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+  
+  .WeFocusOnPeopleSHealthAndUsingOurNewestTechnologyHelpsMonitoringEverythingYouNeedToKnow {
+    width: 214px;
+    height: 100px;
+    left: 496px;
+    top: 594px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 12px;
+    font-family: Inknut Antiqua;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+
+
+  
+  
